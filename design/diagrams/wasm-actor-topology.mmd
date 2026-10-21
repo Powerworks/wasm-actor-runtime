@@ -1,0 +1,25 @@
+flowchart LR
+    Host[Host Runtime<br/>Node.js / Wasmtime / Wasmer]
+    
+    subgraph WASM Instance A [Actor A]
+      MA[Mailbox A<br/>Linear Memory A]
+      CA[actor_main A]
+    end
+    
+    subgraph WASM Instance B [Actor B]
+      MB[Mailbox B<br/>Linear Memory B]
+      CB[actor_main B]
+    end
+    
+    Host -->|deep-copy payload| MA
+    Host -->|deep-copy payload| MB
+    MA -->|receive| CA
+    MB -->|receive| CB
+    CA -->|send| Host
+    CB -->|send| Host
+    
+    style Host fill:#bbf,stroke:#333
+    style MA fill:#bfb,stroke:#333
+    style MB fill:#bfb,stroke:#333
+    style CA fill:#f9f,stroke:#333
+    style CB fill:#f9f,stroke:#333

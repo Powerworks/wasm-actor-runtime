@@ -1,0 +1,8 @@
+.DS_Store
+*.wasm
+*.wat
+target/
+build/
+dist/
+node_modules/
+.vscode/
